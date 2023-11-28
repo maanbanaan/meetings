@@ -15,7 +15,6 @@ if not st.session_state.initialized:
     st.session_state.initialized = True
 
 # Setting number of teams
-st.write('hello')
 NUM_TEAMS = len(st.session_state.data)
 
 # If False, the user can only view the team status, not change it
