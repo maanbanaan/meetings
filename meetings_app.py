@@ -9,7 +9,7 @@ NUM_TEAMS = 12
 
 rows = dict()
 
-if initialized not in st.session_state:
+if 'initialized' not in st.session_state:
     st.session_state.initialized = False
 
 if not st.session_state.initalized:
