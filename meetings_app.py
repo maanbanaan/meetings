@@ -7,15 +7,16 @@ API = "https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/"
 
 if 'initialized' not in st.session_state:
     st.session_state.initialized = False
+    st.session_state.data = None
 
 if not st.session_state.initialized:
     # Getting initial status for each team
     r = requests.get("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/")
-    initial_data = pd.DataFrame(r.json()['data'])
+    st.session_state.data = pd.DataFrame(r.json()['data'])
     st.session_state.initialized = True
 
 # Setting number of teams
-NUM_TEAMS = len(initial_data)
+NUM_TEAMS = len(st.session_state.data)
 
 # If False, the user can only view the team status, not change it
 st.session_state.EDIT = False
@@ -27,7 +28,7 @@ pw = 'HAABSA++'
 rows = dict()
 for i in range(1, NUM_TEAMS + 1):
     if i not in st.session_state:
-        st.session_state[i] = initial_data.loc[initial_data['team'] == i, 'state'].values[0]
+        st.session_state[i] = st.session_state.data.loc[st.session_state.data['team'] == i, 'state'].values[0]
     rows[i] = st.columns([0.2, 0.8])
 
 def click_button(team_number):
