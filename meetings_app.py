@@ -34,7 +34,8 @@ def main():
             st.write(meeting_status)
 
         with col3:
-            if st.button(f"Toggle Status ({team_number})", key=f"button_{team_number}"):
+            button_key = f"button_{team_number}"
+            if st.button(f"Toggle Status ({team_number})", key=button_key):
                 toggle_status(team_number)
 
     # Display the updated table
