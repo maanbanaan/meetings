@@ -21,7 +21,13 @@ for i in range(1, NUM_TEAMS + 1):
         else:
             st.write('Meeting finished.')
 
-with st.expander('Options'):
-    row1 = st.columns(2)
-    row2 = st.columns(2)
-    row3 = st.columns(2)
+row1 = st.columns(2)
+row2 = st.columns(2)
+row3 = st.columns(2)
+
+with row1[0]:
+    st.write('test1')
+with row1[1]:
+    st.write('test2')
+with row2[0]:
+    st.write('test3')
