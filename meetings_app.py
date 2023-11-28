@@ -1,45 +1,27 @@
 import streamlit as st
-import pandas as pd
 
-# Create a DataFrame to store the meeting schedule
-schedule_data = pd.DataFrame({
-    'Team Number': range(1, 11),
-    'Meeting Status': ['Not Started'] * 10
-})
+if 'stage' not in st.session_state:
+    st.session_state.stage = 0
 
-def toggle_status(team_number):
-    current_status = schedule_data.loc[schedule_data['Team Number'] == team_number, 'Meeting Status'].values[0]
-    
-    if current_status == 'Not Started':
-        schedule_data.loc[schedule_data['Team Number'] == team_number, 'Meeting Status'] = 'In Progress'
-    elif current_status == 'In Progress':
-        schedule_data.loc[schedule_data['Team Number'] == team_number, 'Meeting Status'] = 'Complete'
-    elif current_status == 'Complete':
-        schedule_data.loc[schedule_data['Team Number'] == team_number, 'Meeting Status'] = 'Not Started'
+def set_state(i):
+    st.session_state.stage = i
 
-def main():
-    st.title('Meeting Status App')
+if st.session_state.stage == 0:
+    st.button('Begin', on_click=set_state, args=[1])
 
-    # Display the table with a button for each row
-    for index, row in schedule_data.iterrows():
-        team_number = row['Team Number']
-        meeting_status = row['Meeting Status']
-        
-        col1, col2, col3 = st.columns([1, 1, 6])
+if st.session_state.stage >= 1:
+    name = st.text_input('Name', on_change=set_state, args=[2])
 
-        with col1:
-            st.write(f"Team {team_number}")
+if st.session_state.stage >= 2:
+    st.write(f'Hello {name}!')
+    color = st.selectbox(
+        'Pick a Color',
+        [None, 'red', 'orange', 'green', 'blue', 'violet'],
+        on_change=set_state, args=[3]
+    )
+    if color is None:
+        set_state(2)
 
-        with col2:
-            st.write(meeting_status)
-
-        with col3:
-            button_key = f"button_{team_number}"
-            if st.button(f"Toggle Status ({team_number})", key=button_key):
-                toggle_status(team_number)
-
-    # Display the updated table
-    st.table(schedule_data)
-
-if __name__ == '__main__':
-    main()
+if st.session_state.stage >= 3:
+    st.write(f':{color}[Thank you!]')
+    st.button('Start Over', on_click=set_state, args=[0])
