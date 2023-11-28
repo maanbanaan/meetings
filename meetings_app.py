@@ -9,7 +9,7 @@ for i in range(1, NUM_TEAMS + 1):
 def click_button(team_number):
     st.session_state.button = (st.session_state[team_number] + 1) % 3
 
-for i in range(1, 14):
+for i in range(1, NUM_TEAMS + 1):
     st.button(f'Status team {i}', on_click=click_button, args=[i])
     if st.session_state[i] == 0:
         # The message and nested widget will remain on the page
