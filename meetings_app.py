@@ -17,8 +17,8 @@ for i in range(1, NUM_TEAMS + 1):
     with rows[i][1]:
         if st.session_state[i] == 0:
             # The message and nested widget will remain on the page
-            st.write('Meeting not started.')
+            st.write(':red[Meeting not started.]')
         elif st.session_state[i] == 1:
-            st.write('Meeting in progress!')
+            st.write(':orange[Meeting in progress!]')
         else:
-            st.write('Meeting finished.')
+            st.write(':green[Meeting finished.]')
