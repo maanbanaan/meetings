@@ -12,7 +12,6 @@ for i in range(1, 14):
 if st.session_state.button == 0:
     # The message and nested widget will remain on the page
     st.write('Meeting not started.')
-    st.slider('Select a value')
 elif st.session_state.button == 1:
     st.write('Meeting in progress!')
 else:
