@@ -7,11 +7,10 @@ rows = dict()
 for i in range(1, NUM_TEAMS + 1):
     if i not in st.session_state:
         st.session_state[i] = 0
-    rows[i] = st.columns(2)
+    rows[i] = st.columns([0.3, 0.7])
 
 def click_button(team_number):
     st.session_state[team_number] = (st.session_state[team_number] + 1) % 3
-col1, col2 = st.columns([1,1])
 for i in range(1, NUM_TEAMS + 1):
     with rows[i][0]:
         st.button(f'Status team {i}', on_click=click_button, args=[i])
