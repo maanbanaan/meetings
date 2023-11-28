@@ -7,7 +7,6 @@ API = "https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/"
 
 if 'initialized' not in st.session_state:
     st.session_state.initialized = False
-    st.session_state.data = None
 
 if not st.session_state.initialized:
     # Getting initial status for each team
@@ -16,6 +15,7 @@ if not st.session_state.initialized:
     st.session_state.initialized = True
 
 # Setting number of teams
+st.write('hello')
 NUM_TEAMS = len(st.session_state.data)
 
 # If False, the user can only view the team status, not change it
