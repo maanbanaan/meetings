@@ -58,3 +58,12 @@ for i in range(1, NUM_TEAMS + 1):
             st.write(':orange[Meeting in progress!]')
         else:
             st.write(':green[Meeting finished.]')
+
+if 'something' not in st.session_state:
+    st.session_state.something = ''
+
+def submit():
+    st.session_state.something = st.session_state.widget
+    st.session_state.widget = ''
+
+st.text_input('Something', key='widget', on_change=submit)
