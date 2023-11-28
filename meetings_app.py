@@ -12,7 +12,7 @@ rows = dict()
 if 'initialized' not in st.session_state:
     st.session_state.initialized = False
 
-if not st.session_state.initalized:
+if not st.session_state.initialized:
     # Getting initial status for each team
     r = requests.get("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/")
     initial_data = pd.DataFrame(r.json()['data'])
