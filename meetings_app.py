@@ -15,7 +15,7 @@ initial_data = pd.DataFrame(r.json()['data'])
 
 for i in range(1, NUM_TEAMS + 1):
     if i not in st.session_state:
-        st.session_state[i] = df.loc[df['team'] == i, 'state'].values[0]
+        st.session_state[i] = initial_data.loc[initial_data['team'] == i, 'state'].values[0]
     rows[i] = st.columns([0.2, 0.8])
 
 def click_button(team_number):
