@@ -13,6 +13,12 @@ rows = dict()
 r = requests.get("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/")
 initial_data = pd.DataFrame(r.json()['data'])
 
+# If False, the user can only view the team status, not change it
+st.session_state.EDIT = False
+
+# Required to enter edit mode
+pw = 'HAABSA++'
+
 for i in range(1, NUM_TEAMS + 1):
     if i not in st.session_state:
         st.session_state[i] = initial_data.loc[initial_data['team'] == i, 'state'].values[0]
@@ -28,7 +34,10 @@ def click_button(team_number):
     
 for i in range(1, NUM_TEAMS + 1):
     with rows[i][0]:
-        st.button(f'Status team {i}', on_click=click_button, args=[i])
+        if st.session_state.EDIT:
+            st.button(f'Status team {i}', on_click=click_button, args=[i])
+        else: 
+            st.write(f'Status team {i}')
     with rows[i][1]:
         if st.session_state[i] == 0:
             # The message and nested widget will remain on the page
@@ -37,3 +46,9 @@ for i in range(1, NUM_TEAMS + 1):
             st.write(':orange[Meeting in progress!]')
         else:
             st.write(':green[Meeting finished.]')
+
+user_input = st.text_input('Enter password to enable editing', placeholder = 'password')
+if user_input == pw:
+    st.success('Editing enabled', icon="✅")
+else:
+    st.error('Wrong password', icon="🚨")
