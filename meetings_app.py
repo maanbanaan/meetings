@@ -35,7 +35,7 @@ def click_button(team_number):
 user_input = st.text_input("Enter password to toggle editing (please don't spam I have limited API calls 😢)", placeholder = 'Password')
 if user_input == pw:
     st.success('Editing toggled')
-    st.session_state.EDIT = True
+    st.session_state.EDIT = not st.session_state.EDIT
 elif user_input != "":
     st.error('Wrong password', icon="🤡")
 
