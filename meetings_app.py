@@ -46,10 +46,10 @@ if 'user_input' not in st.session_state:
 
 st.text_input("Enter password to toggle editing", key = 'widget', on_change = submit)
 
-if user_input == pw:
+if st.session_state.user_input == pw:
     st.success('Editing toggled')
     st.session_state.EDIT = not st.session_state.EDIT
-elif user_input != "":
+elif st.session_state.user_input != "":
     st.error('Wrong password', icon="🤡")
 
 for i in range(1, NUM_TEAMS + 1):
