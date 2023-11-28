@@ -9,9 +9,14 @@ NUM_TEAMS = 12
 
 rows = dict()
 
-# Getting initial status for each team
-r = requests.get("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/")
-initial_data = pd.DataFrame(r.json()['data'])
+if initialized not in st.session_state:
+    st.session_state.initialized = False
+
+if not st.session_state.initalized:
+    # Getting initial status for each team
+    r = requests.get("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/")
+    initial_data = pd.DataFrame(r.json()['data'])
+    st.session_state.initialized = True
 
 # If False, the user can only view the team status, not change it
 st.session_state.EDIT = False
@@ -32,7 +37,7 @@ def click_button(team_number):
     # Update spreadsheet
     r = requests.post("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/", headers={}, json={"data": {"state":f"{new_state}"}, "query": f"select * from PEiZQxeLHxAruOzL where team='{team_number}'"})
 
-user_input = st.text_input("Enter password to toggle editing (please don't spam I have limited API calls 😢)", placeholder = 'Password')
+user_input = st.text_input("Enter password to toggle editing", placeholder = 'Password')
 if user_input == pw:
     st.success('Editing toggled')
     st.session_state.EDIT = not st.session_state.EDIT
