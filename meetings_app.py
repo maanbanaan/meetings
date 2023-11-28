@@ -48,7 +48,6 @@ for i in range(1, NUM_TEAMS + 1):
             st.write(':green[Meeting finished.]')
 
 user_input = st.text_input("Enter password to toggle editing (please don't spam I have limited API calls)", placeholder = 'Password')
-st.write(f'your input: {user_input}, type: {type(user_input)}')
 if user_input == pw:
     st.success('Editing toggled')
     st.session_state.EDIT = not st.session_state.EDIT
