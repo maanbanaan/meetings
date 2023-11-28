@@ -20,3 +20,8 @@ for i in range(1, NUM_TEAMS + 1):
             st.write('Meeting in progress!')
         else:
             st.write('Meeting finished.')
+
+with st.expander('Options'):
+    row1 = st.columns(2)
+    row2 = st.columns(2)
+    row3 = st.columns(2)
