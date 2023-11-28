@@ -47,8 +47,8 @@ for i in range(1, NUM_TEAMS + 1):
         else:
             st.write(':green[Meeting finished.]')
 
-user_input = st.text_input('Enter password to enable editing', placeholder = 'password')
+user_input = st.text_input('Enter password to enable editing', placeholder = 'Password')
 if user_input == pw:
     st.success('Editing enabled', icon="✅")
-else:
+elif user_input is not None:
     st.error('Wrong password', icon="🚨")
