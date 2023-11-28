@@ -5,10 +5,6 @@ import pandas as pd
 # Defining API to access spreadsheet
 API = "https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/"
 
-NUM_TEAMS = 12
-
-rows = dict()
-
 if 'initialized' not in st.session_state:
     st.session_state.initialized = False
 
@@ -18,12 +14,17 @@ if not st.session_state.initialized:
     initial_data = pd.DataFrame(r.json()['data'])
     st.session_state.initialized = True
 
+# Setting number of teams
+NUM_TEAMS = len(initial_data)
+
 # If False, the user can only view the team status, not change it
 st.session_state.EDIT = False
 
 # Required to enter edit mode
 pw = 'HAABSA++'
 
+# Setting up formatting
+rows = dict()
 for i in range(1, NUM_TEAMS + 1):
     if i not in st.session_state:
         st.session_state[i] = initial_data.loc[initial_data['team'] == i, 'state'].values[0]
