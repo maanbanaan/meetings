@@ -37,7 +37,15 @@ def click_button(team_number):
     # Update spreadsheet
     r = requests.post("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/", headers={}, json={"data": {"state":f"{new_state}"}, "query": f"select * from PEiZQxeLHxAruOzL where team='{team_number}'"})
 
-user_input = st.text_input("Enter password to toggle editing", placeholder = 'Password')
+def submit():
+    st.session_state.user_input = st.session_state.widget
+    st.session_state.widget = ''
+
+if 'user_input' not in st.session_state:
+    st.session_state.user_input = ''
+
+st.text_input("Enter password to toggle editing", key = 'widget', on_change = submit)
+
 if user_input == pw:
     st.success('Editing toggled')
     st.session_state.EDIT = not st.session_state.EDIT
@@ -58,12 +66,3 @@ for i in range(1, NUM_TEAMS + 1):
             st.write(':orange[Meeting in progress!]')
         else:
             st.write(':green[Meeting finished.]')
-
-if 'something' not in st.session_state:
-    st.session_state.something = ''
-
-def submit():
-    st.session_state.something = st.session_state.widget
-    st.session_state.widget = ''
-
-st.text_input('Something', key='widget', on_change=submit)
