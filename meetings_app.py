@@ -25,7 +25,7 @@ def main():
         team_number = row['Team Number']
         meeting_status = row['Meeting Status']
         
-        col1, col2, col3 = st.beta_columns([1, 1, 6])
+        col1, col2, col3 = st.columns([1, 1, 6])
 
         with col1:
             st.write(f"Team {team_number}")
