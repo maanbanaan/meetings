@@ -7,7 +7,7 @@ rows = dict()
 for i in range(1, NUM_TEAMS + 1):
     if i not in st.session_state:
         st.session_state[i] = 0
-    rows[i] = st.columns([0.1, 0.9])
+    rows[i] = st.columns([0.2, 0.8])
 
 def click_button(team_number):
     st.session_state[team_number] = (st.session_state[team_number] + 1) % 3
