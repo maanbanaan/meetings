@@ -7,7 +7,8 @@ def load_data(credentials, sheet_name):
     gc = gspread.service_account_from_dict(credentials)
     sh = gc.open(sheet_name)
     wks = sh.worksheet("Sheet1")
-    st.session_state.data = pd.DataFrame(wks.get_all_values())
+    raw_data = wks.get_all_values()
+    st.session_state.data = pd.DataFrame(raw_data[1:], columns = raw_data[0])
     # return pd.DataFrame(wks.get_all_values())
 
 def click_button(team_number):
