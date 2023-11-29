@@ -21,7 +21,7 @@ NUM_TEAMS = len(st.session_state.data)
 st.session_state.EDIT = False
 
 # Required to enter edit mode
-pw = 'HAABSA++'
+pw = st.secrets["DB_PASS"]
 
 # Setting up formatting
 rows = dict()
