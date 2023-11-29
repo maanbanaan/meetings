@@ -8,7 +8,10 @@ def load_data(credentials, sheet_name):
     sh = gc.open(sheet_name)
     wks = sh.worksheet("Sheet1")
     raw_data = wks.get_all_values()
-    st.session_state.data = pd.DataFrame(raw_data[1:], columns = raw_data[0])
+    df = pd.DataFrame(raw_data[1:], columns = raw_data[0])
+    df['team'], df['state'] = df['team'].astype(int), df['state'].astype(int)
+    st.session_state.data = df
+    
     # return pd.DataFrame(wks.get_all_values())
 
 def click_button(team_number):
