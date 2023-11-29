@@ -53,8 +53,7 @@ st.session_state.EDIT = False
 # Setting up formatting
 rows = dict()
 for i in range(1, NUM_TEAMS + 1):
-    if i not in st.session_state:
-        st.session_state[i] = st.session_state.data.loc[st.session_state.data['team'] == i, 'state'].values[0]
+    st.session_state[i] = st.session_state.data.loc[st.session_state.data['team'] == i, 'state'].values[0]
     rows[i] = st.columns([0.2, 0.8])
 
 if 'user_input' not in st.session_state:
