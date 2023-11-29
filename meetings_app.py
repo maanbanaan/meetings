@@ -7,6 +7,8 @@ def load_data(credentials, sheet_name):
     gc = gspread.service_account_from_dict(credentials)
     sh = gc.open(sheet_name)
     wks = sh.worksheet("Sheet1")
+    st.session_state.worksheet = wks
+    
     raw_data = wks.get_all_values()
     df = pd.DataFrame(raw_data[1:], columns = raw_data[0])
     df['team'], df['state'] = df['team'].astype(int), df['state'].astype(int)
@@ -20,7 +22,7 @@ def click_button(team_number):
     st.session_state[team_number] = new_state
 
     # Update spreadsheet
-    wks.update(range_name = f'B{team_number + 1}', values = new_state)
+    st.session_state.worksheet.update(range_name = f'B{team_number + 1}', values = new_state)
     
     # r = requests.post("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/", headers={}, json={"data": {"state":f"{new_state}"}, "query": f"select * from PEiZQxeLHxAruOzL where team='{team_number}'"})
 
