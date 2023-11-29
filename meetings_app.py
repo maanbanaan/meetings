@@ -22,7 +22,7 @@ def click_button(team_number):
     st.session_state[team_number] = new_state
 
     # Update spreadsheet
-    st.session_state.worksheet.update(range_name = f'B{team_number + 1}', values = new_state)
+    st.session_state.worksheet.update(range_name = f'B{team_number + 1}', values = int(new_state))
     
     # r = requests.post("https://api.apispreadsheets.com/data/PEiZQxeLHxAruOzL/", headers={}, json={"data": {"state":f"{new_state}"}, "query": f"select * from PEiZQxeLHxAruOzL where team='{team_number}'"})
 
