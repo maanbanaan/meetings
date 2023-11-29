@@ -1,5 +1,9 @@
 import streamlit as st
 import pandas as pd
+import gspread
+
+for cred in st.secrets["google_creds"]:
+    st.write(cred)
 
 schedule_data = pd.DataFrame({
     'Team Number': range(1, 11),
