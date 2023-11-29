@@ -20,7 +20,7 @@ def click_button(team_number):
     new_state = (st.session_state[team_number] + 1) % 3
     # Update session state
     st.session_state[team_number] = new_state
-    st.session_state.data.loc[st.session_state.data['team'] == i, 'state'] = new_state
+    st.session_state.data.loc[st.session_state.data['team'] == team_number, 'state'] = new_state
     
     # Update spreadsheet
     st.session_state.worksheet.update(range_name = f'B{team_number + 1}', values = int(new_state))
