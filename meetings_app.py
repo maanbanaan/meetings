@@ -79,7 +79,7 @@ if st.session_state.user_input == pw:
     st.success('Editing toggled')
     st.session_state.EDIT = not st.session_state.EDIT
     with rows[0][1]:
-        st.button("Reset", on_click=reset())
+        st.button("Reset", on_click=reset)
 elif st.session_state.user_input != "":
     st.error('Wrong password', icon="🤡")
 
