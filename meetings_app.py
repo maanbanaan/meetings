@@ -31,6 +31,13 @@ def submit():
     st.session_state.user_input = st.session_state.widget
     st.session_state.widget = ''
 
+# Resets every meeting status to "Not started"
+def reset():
+    for team_numer in range(1, NUM_TEAMS + 1):
+        st.session_state[team_number] = 0
+        st.session_state.data.loc[st.session_state.data['team'] == team_number, 'state'] = 0
+    st.session_state.worksheet.update(range_name = f'B2:B{NUM_TEAMS + 1}', values = [[0] for k in range(NUM_TEAM)])
+
 google_credentials = {cred: st.secrets["google_creds"][cred] for cred in st.secrets["google_creds"]}
 
 # Password to enter edit mode
@@ -53,10 +60,15 @@ NUM_TEAMS = len(st.session_state.data)
 # If False, the user can only view the team status, not change it
 st.session_state.EDIT = False
 
-st.button('Reload', on_click=load_data(google_credentials, "team_status"))
+rows = dict()
+rows[0] = st.columns([0.15, 0.85])
+with rows[0][0]:
+    st.button('Reload', on_click=load_data(google_credentials, "team_status"))
+with rows[0][1]:
+    if st.session_state.EDIT:
+        st.button('Reset', on_click=reset())
 
 # Setting up formatting
-rows = dict()
 for i in range(1, NUM_TEAMS + 1):
     st.session_state[i] = st.session_state.data.loc[st.session_state.data['team'] == i, 'state'].values[0]
     rows[i] = st.columns([0.2, 0.8])
