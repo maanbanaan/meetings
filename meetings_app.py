@@ -61,7 +61,7 @@ NUM_TEAMS = len(st.session_state.data)
 st.session_state.EDIT = False
 
 rows = dict()
-rows[0] = st.columns([0.15, 0.85])
+rows[0] = st.columns([0.2, 0.8])
 with rows[0][0]:
     st.button('Reload', on_click=load_data(google_credentials, "team_status"))
 
