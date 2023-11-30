@@ -36,7 +36,7 @@ def reset():
     for team_number in range(1, NUM_TEAMS + 1):
         st.session_state[team_number] = 0
         st.session_state.data.loc[st.session_state.data['team'] == team_number, 'state'] = 0
-    st.session_state.worksheet.update(range_name = f'B2:B{NUM_TEAMS + 1}', values = [[0] for k in range(NUM_TEAM)])
+    st.session_state.worksheet.update(range_name = f'B2:B{NUM_TEAMS + 1}', values = [[0] for k in range(NUM_TEAMS)])
 
 google_credentials = {cred: st.secrets["google_creds"][cred] for cred in st.secrets["google_creds"]}
 
