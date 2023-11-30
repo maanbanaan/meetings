@@ -64,9 +64,6 @@ rows = dict()
 rows[0] = st.columns([0.15, 0.85])
 with rows[0][0]:
     st.button('Reload', on_click=load_data(google_credentials, "team_status"))
-with rows[0][1]:
-    if st.session_state.EDIT:
-        st.button('Reset', on_click=reset())
 
 # Setting up formatting
 for i in range(1, NUM_TEAMS + 1):
@@ -81,6 +78,8 @@ st.text_input("Enter password to toggle editing", key = 'widget', on_change = su
 if st.session_state.user_input == pw:
     st.success('Editing toggled')
     st.session_state.EDIT = not st.session_state.EDIT
+    with rows[0][1]:
+        st.button("Reset", on_click=reset())
 elif st.session_state.user_input != "":
     st.error('Wrong password', icon="🤡")
 
