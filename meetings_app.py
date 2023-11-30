@@ -53,6 +53,8 @@ NUM_TEAMS = len(st.session_state.data)
 # If False, the user can only view the team status, not change it
 st.session_state.EDIT = False
 
+st.button('Reload', on_click=load_data(google_credentials, "Sheet1"))
+
 # Setting up formatting
 rows = dict()
 for i in range(1, NUM_TEAMS + 1):
